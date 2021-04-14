@@ -1,2 +1,1 @@
-def draft_method():
-    print('It works!')
+__version__ = '0.0.5'
