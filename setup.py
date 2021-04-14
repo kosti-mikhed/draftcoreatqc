@@ -6,7 +6,7 @@ with open("README.md", encoding="utf-8") as readme_file:
 
 setuptools.setup(
     name='draftcoreatqc',
-    version='0.0.6',
+    version='0.1.0',
     description='Draft framework core',
     long_description=readme,
     url='https://github.com/kosti-mikhed/draftcoreatqc.git',
@@ -18,5 +18,12 @@ setuptools.setup(
     zip_safe=False,
     classifiers=[
         'Programming Language :: Python :: 3'
+    ],
+    install_requires=[
+        'pytest',
+        'requests',
+        'jsonschema',
+        'selenium',
+        'allure-pytest'
     ]
 )
