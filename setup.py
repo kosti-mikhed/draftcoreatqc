@@ -5,8 +5,8 @@ with open("README.md", encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
 setuptools.setup(
-    name='draft_core_atqc',
-    version='0.0.5',
+    name='draftcoreatqc',
+    version='0.0.6',
     description='Draft framework core',
     long_description=readme,
     url='https://github.com/kosti-mikhed/draftcoreatqc.git',
