@@ -6,6 +6,10 @@ Response = namedtuple('Response', ['status_code', 'body'])
 class Requests:
 
     def __init__(self, rest):
+        """
+        Initializing Requests object
+        :param rest: Rest session
+        """
         self.rest = rest
 
     def send_request(self,
