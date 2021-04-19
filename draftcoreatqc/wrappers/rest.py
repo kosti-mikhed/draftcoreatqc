@@ -7,6 +7,7 @@ from requests import Session
 class Rest:
     """
     Class of REST API client wrapper
+    By default is initiated with cleared cookies
     """
     def __init__(self):
         self.rest = Session()
