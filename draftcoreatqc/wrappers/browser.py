@@ -2,6 +2,7 @@
 Module for Browser driver instance initiating
 """
 import os
+from typing import Dict, Any
 from selenium import webdriver
 
 
@@ -12,6 +13,42 @@ class Browser:
 
     def __init__(self):
         self.driver = webdriver
+
+    def selenoid_browser(self, browser_name, enable_video: bool = False, video_name: str = ""):
+        """Running browser in selenoid (currently local only), chrome or firefox"""
+        driver = self.driver
+        if browser_name == "chrome":
+            capabilities: Dict[str, Any] = {
+                "browserName": "chrome",
+                "browserVersion": "87.0",
+                "selenoid:options": {
+                    "enableVNC": True,
+                    "enableVideo": enable_video
+                }
+            }
+            options = driver.ChromeOptions()
+            options.add_argument("--window-size=1920,1080")
+        elif browser_name == "firefox":
+            capabilities: Dict[str, Any] = {
+                "browserName": "firefox",
+                "browserVersion": "83.0",
+                "selenoid:options": {
+                    "enableVNC": True,
+                    "enableVideo": enable_video
+                }
+            }
+            options = driver.FirefoxOptions()
+            options.add_argument("--window-size=1920,1080")
+        else:
+            raise Exception(f'Unsupported browser {browser_name}')
+
+        if enable_video and video_name:
+            capabilities["selenoid:options"].update({"videoName": f"{video_name}.mp4"})
+        driver = driver.Remote(
+            command_executor="http://localhost:4444/wd/hub",
+            desired_capabilities=capabilities,
+            options=options)
+        return driver
 
     def browser_driver(self, browser_name: str):
         """
